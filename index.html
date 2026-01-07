@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Humanize AI Text - Standalone</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <div class="logo">
+                <span class="logo-icon">✨</span>
+                <h1>Humanize AI</h1>
+            </div>
+            <div class="actions">
+                <button id="settingsBtn" class="icon-btn" title="Settings">⚙️</button>
+            </div>
+        </header>
+
+        <main>
+            <div class="editor-container">
+                <div class="pane left">
+                    <div class="pane-header">
+                        <h2>Original AI Draft</h2>
+                        <div class="pane-actions">
+                            <button id="clearBtn" class="text-btn">Clear</button>
+                        </div>
+                    </div>
+                    <div id="sourceEditor"></div>
+                </div>
+
+                <div class="pane right">
+                    <div class="pane-header">
+                        <h2>Humanized Version</h2>
+                        <div class="pane-actions">
+                            <button id="copyBtn" class="text-btn">Copy</button>
+                        </div>
+                    </div>
+                    <div id="outputEditor"></div>
+                </div>
+            </div>
+
+            <div class="main-controls">
+                <button id="humanizeBtn" class="primary-btn">
+                    <span class="btn-text">Humanize Text</span>
+                    <span class="loader hidden"></span>
+                </button>
+            </div>
+        </main>
+
+        <!-- Settings Modal -->
+        <div id="settingsModal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Settings</h3>
+                    <button id="closeSettings" class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="apiKey">Gemini API Key</label>
+                        <input type="password" id="apiKey" placeholder="Enter your Gemini API Key">
+                        <p class="help-text">Get one for free at <a href="https://aistudio.google.com/app/apikey"
+                                target="_blank">Google AI Studio</a></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="customGuidelines">Custom Guidelines (Optional)</label>
+                        <textarea id="customGuidelines" rows="4"
+                            placeholder="e.g. Keep it professional, use British spelling, etc."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="saveSettings" class="primary-btn">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
