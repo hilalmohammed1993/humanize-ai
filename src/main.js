@@ -1,6 +1,7 @@
 import './style.css';
 import Quill from 'quill';
 import { humanizeText } from './gemini.js';
+import { initAnalytics, trackEvent } from './analytics.js';
 
 // DOM Elements
 const settingsBtn = document.getElementById('settingsBtn');
@@ -92,6 +93,7 @@ window.onclick = (event) => {
 clearBtn.onclick = () => {
     sourceEditor.setText('');
     outputEditor.setText('');
+    trackEvent('clear_content', { category: 'editor' });
 };
 
 copyBtn.onclick = () => {
@@ -105,6 +107,7 @@ copyBtn.onclick = () => {
 
     navigator.clipboard.write(data).then(() => {
         copyBtn.innerText = 'Copied!';
+        trackEvent('copy_content', { category: 'editor', length: outputEditor.getText().length });
         setTimeout(() => copyBtn.innerText = 'Copy', 2000);
     });
 };
@@ -124,10 +127,13 @@ humanizeBtn.onclick = async () => {
     }
 
     setLoading(true);
+    trackEvent('humanize_attempt', { category: 'interaction' });
     try {
         const humanizedHtml = await humanizeText(htmlContent, apiKey, customGuidelines);
         outputEditor.root.innerHTML = humanizedHtml;
+        trackEvent('humanize_success', { category: 'interaction', length: humanizedHtml.length });
     } catch (error) {
+        trackEvent('humanize_fail', { category: 'interaction', error: error.message });
         alert('Error: ' + error.message);
     } finally {
         setLoading(false);
@@ -147,3 +153,4 @@ function setLoading(isLoading) {
 
 // Initial Load
 loadSettings();
+initAnalytics();
