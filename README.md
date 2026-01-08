@@ -12,7 +12,7 @@ A post-processing tool designed to refine AI-generated content into natural, hum
 1. **Clone the repo**: `git clone <your-repo-url>`
 2. **Install dependencies**: `npm install`
 3. **Run locally**: `npm run dev`
-4. **Deploy**: The project is pre-configured for GitHub Pages. Simply run `npm run build` and push the `dist` folder.
+4. **Deploy**: This project is configured with **GitHub Actions**. Simply push your changes to the `main` branch, and it will automatically build and deploy to GitHub Pages.
 
 ## Setup
 1. Open the app.
