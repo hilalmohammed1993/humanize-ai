@@ -66,8 +66,14 @@
                     <div class="form-group">
                         <label for="apiKey">Gemini API Key</label>
                         <input type="password" id="apiKey" placeholder="Enter your Gemini API Key">
-                        <p class="help-text">Get one for free at <a href="https://aistudio.google.com/app/apikey"
-                                target="_blank">Google AI Studio</a></p>
+                        <div class="help-text">
+                            <p>1. Go to <a href="https://aistudio.google.com/app/apikey" target="_blank">Google AI
+                                    Studio</a>.</p>
+                            <p>2. Create a free API key for <b>Gemini 1.5 Flash</b>.</p>
+                            <p>3. Paste it here to enable text humanization.</p>
+                            <p class="privacy-note">🔒 <b>Privacy:</b> Your key is stored locally in your browser. It is
+                                used only to connect directly to Google's API and is never shared with anyone.</p>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="customGuidelines">Custom Guidelines (Optional)</label>
@@ -76,6 +82,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button id="testApiBtn" class="text-btn" style="margin-right: auto;">Check Connection</button>
                     <button id="saveSettings" class="primary-btn">Save Changes</button>
                 </div>
             </div>

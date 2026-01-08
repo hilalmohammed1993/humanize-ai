@@ -266,6 +266,19 @@ main {
 .help-text {
     font-size: 0.75rem;
     color: var(--text-secondary);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-top: 0.25rem;
+}
+
+.privacy-note {
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    background: rgba(34, 211, 238, 0.1);
+    border-radius: 0.5rem;
+    color: var(--accent);
+    border: 1px solid rgba(34, 211, 238, 0.2);
 }
 
 .help-text a {

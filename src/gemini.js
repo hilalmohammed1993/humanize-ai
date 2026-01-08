@@ -16,9 +16,25 @@ export async function humanizeText(htmlContent, apiKey, customGuidelines = '') {
     if (!apiKey) throw new Error('Gemini API Key is missing. Please add it in settings.');
 
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    const prompt = `${BASE_PROMPT}
+    // Re-prioritizing Gemini 1.5 models as they are the standard for the Google AI 'Free Tier'.
+    // 2.0/2.5 often have a '0' limit on free accounts until billing is verified.
+    const modelsToTry = [
+        "gemini-1.5-flash",
+        "gemini-1.5-flash-latest",
+        "gemini-1.5-pro",
+        "gemini-flash-latest",
+        "gemini-2.0-flash",
+        "gemini-pro"
+    ];
+    let lastError = null;
+
+    for (const modelName of modelsToTry) {
+        try {
+            console.log(`Attempting humanization with model: ${modelName}`);
+            const model = genAI.getGenerativeModel({ model: modelName });
+
+            const prompt = `${BASE_PROMPT}
 
 ${customGuidelines ? `Additional User Guidelines: ${customGuidelines}` : ''}
 
@@ -27,17 +43,23 @@ ${htmlContent}
 
 Humanized Output (HTML):`;
 
-    try {
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        let text = response.text();
+            const result = await model.generateContent(prompt);
+            const response = await result.response;
+            let text = response.text();
 
-        // Remove markdown block backticks if the model accidentally included them
-        text = text.replace(/^```html\n?/, '').replace(/\n?```$/, '');
-
-        return text;
-    } catch (error) {
-        console.error('Humanization failed:', error);
-        throw error;
+            // Remove markdown block backticks if the model accidentally included them
+            return text.replace(/^```html\n?/, '').replace(/\n?```$/, '');
+        } catch (error) {
+            console.error(`Failed with model ${modelName}:`, error);
+            lastError = error;
+            // If it's a 404 (model not found), we try the next one
+            if (error.message.includes('404') || error.message.includes('not found')) {
+                continue;
+            }
+            // If it's another error (e.g. key issue), we stop and throw
+            throw error;
+        }
     }
+
+    throw lastError || new Error('All humanization models failed. Please check your API key and region compatibility.');
 }

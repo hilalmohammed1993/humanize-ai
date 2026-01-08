@@ -17,9 +17,18 @@ A post-processing tool designed to refine AI-generated content into natural, hum
 ## Setup
 1. Open the app.
 2. Click the **Settings (⚙️)** icon.
-3. Paste your **Gemini API Key** (Get it free at [Google AI Studio](https://aistudio.google.com/app/apikey)).
-4. (Optional) Add your custom humanization guidelines.
-5. Click **Save Changes**.
+3. **Get your API Key**:
+   - Go to [Google AI Studio](https://aistudio.google.com/app/apikey).
+   - Create a free key for "Gemini 1.5 Flash".
+4. Paste the key into the settings modal.
+5. (Optional) Add your custom humanization guidelines.
+6. Click **Save Changes**.
+
+## 🔒 Privacy & Security
+This is a **standalone static application**. 
+- **Local Storage**: Your API key is stored only in your browser's local storage.
+- **Direct Connection**: The app communicates directly from your browser to Google's Gemini API.
+- **No Data Collection**: There is no backend server. Your text and keys are never shared with the developers or any third party.
 
 ## How to Use
 1. Paste your AI-generated draft into the **Original AI Draft** pane.

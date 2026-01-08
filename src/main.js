@@ -7,6 +7,7 @@ const settingsBtn = document.getElementById('settingsBtn');
 const settingsModal = document.getElementById('settingsModal');
 const closeSettings = document.getElementById('closeSettings');
 const saveSettings = document.getElementById('saveSettings');
+const testApiBtn = document.getElementById('testApiBtn');
 const apiKeyInput = document.getElementById('apiKey');
 const customGuidelinesInput = document.getElementById('customGuidelines');
 
@@ -54,6 +55,30 @@ const saveSettingsToLocal = () => {
 settingsBtn.onclick = () => settingsModal.classList.remove('hidden');
 closeSettings.onclick = () => settingsModal.classList.add('hidden');
 saveSettings.onclick = saveSettingsToLocal;
+
+testApiBtn.onclick = async () => {
+    const key = apiKeyInput.value;
+    if (!key) {
+        alert('Please enter an API key first.');
+        return;
+    }
+
+    testApiBtn.innerText = 'Checking...';
+    try {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${key}`);
+        const data = await response.json();
+        if (data.models) {
+            alert(`✅ Connection Successful!\nYour key has access to ${data.models.length} models.`);
+            console.log('Available Models:', data.models);
+        } else {
+            alert('❌ Connection Failed: ' + (data.error?.message || 'Invalid API key or response.'));
+        }
+    } catch (e) {
+        alert('❌ Error: ' + e.message);
+    } finally {
+        testApiBtn.innerText = 'Check Connection';
+    }
+};
 
 window.onclick = (event) => {
     if (event.target === settingsModal) {
