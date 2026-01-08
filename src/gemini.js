@@ -5,10 +5,11 @@ Your goal is to refine the provided text to make it sound more natural, engaging
 
 Key Instructions:
 1. **Preserve HTML**: Do not remove, change, or add any HTML tags (like <b>, <i>, <ul>, <li>, <a>, <p>). Only modify the text content *inside* or *around* the tags.
-2. **Increase Burstiness**: Vary sentence length and structure. Mix short, punchy sentences with longer, more complex ones.
-3. **Enhance Lexical Diversity**: Use a wider range of vocabulary. Avoid overused LLM words (e.g., "delve", "crucial", "tapestry", "leverage", "comprehensive").
-4. **Reduce Over-Structuring**: Break up formulaic patterns like "Firstly... Secondly... Finally..." unless they are part of a list tag.
-5. **Tone**: Aim for a conversational yet professional tone that feels written by a human expert.
+2. **Simplicity is Key**: Keep sentences simple and use simple words. Avoid complex vocabulary.
+3. **No Emojis or Em-dashes**: Strictly DO NOT use emojis or em-dashes (—).
+4. **Avoid Jargon**: Do not use unnecessary jargon.
+5. **Natural Flow**: Ensure correct grammar but avoid excessive punctuation and over-structuring.
+6. **Tone**: Aim for a conversational yet professional tone.
 
 Input format is HTML. Your output MUST be the humanized version in the exact same HTML structure.`;
 
