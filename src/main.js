@@ -29,7 +29,10 @@ const quillOptions = {
     }
 };
 
-const sourceEditor = new Quill('#sourceEditor', quillOptions);
+const sourceEditor = new Quill('#sourceEditor', {
+    ...quillOptions,
+    placeholder: 'Paste your AI-generated draft here...'
+});
 const outputEditor = new Quill('#outputEditor', {
     ...quillOptions,
     placeholder: 'Humanized text will appear here...'
